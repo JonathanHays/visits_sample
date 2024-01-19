@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<!--
+created by: Jonathan Hays
+ -->
+<head th:replace="~{fragments :: head}">
+</head>
+
+<body>
+    <!-- Responsive navbar-->
+    <div>
+        <div class="sticky-top">
+            <div th:replace="~{fragments :: navBarStaff}"></div>
+        </div>
+    </div>
+    <!-- Page content-->
+    <section class="py-3 py-md-5 py-xl-8">
+        <div class="container">
+            <div class="row gy-4 align-items-center">
+                <div class="card col-12 col-md-6 col-xl-5 m-auto">
+                    <div class="border-0 rounded-4">
+                        <div class="card-body p-3 p-md-4 p-xl-5">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-4">
+                                        <h3>Location Details</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <form method="post" id="editLocation">
+
+                                <input th:field="${location.id}" class="form-control" readonly hidden>
+                                <div class="row gy-3 overflow-hidden">
+                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <input th:field="${location.name}" class="form-control" required>
+                                            <label for="firstName" class="form-label">Location Name:</label>
+                                            <p class="error" th:errors="${location.name}"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <input th:field="${location.abbreviatedName}" class="form-control" required>
+                                            <label for="lastName" class="form-label">Location Abbreviation:</label>
+                                            <p class="error" th:errors="${location.abbreviatedName}"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <input type="text"  th:value="${location.isActive}" id="currentStatus" hidden/>
+                                            <select th:field="${location.isActive}" class="form-control" required>
+                                                <option th:value="true">Active</option>
+                                                <option th:value="false">Inactive</option>
+                                            </select>
+                                            <label for="isActive" class="form-label">Status:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="d-grid">
+                                            <button class="btn btn-primary btn-lg" type="submit">Update</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

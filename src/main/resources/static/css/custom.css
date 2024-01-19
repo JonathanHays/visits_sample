@@ -1,0 +1,129 @@
+.error{
+    color:red;
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 4px;
+    vertical-align: middle;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid;
+    content: '';
+}
+
+/* Rotate the caret for the dropdown */
+.caret-down {
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+.caret-up {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
+}
+
+.tableIMG {
+    height: 25px;
+}
+
+.tableIMG:hover {
+        height: 30px;
+}
+
+    table td,
+    table th {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+thead th {
+    color: #fff;
+}
+
+.card {
+    border-radius: .5rem;
+}
+
+.table-scroll {
+    border-radius: .5rem;
+}
+
+    .table-scroll table thead th {
+        font-size: 1.25rem;
+    }
+
+thead {
+    top: 0;
+    position: sticky;
+}
+
+
+.mobileTable{
+    display:none;
+}
+
+.todayLink {
+    text-decoration-line: underline;
+    text-decoration-color: #2f6993;
+    float: right;
+    margin-right: 3%;
+    margin-bottom: 1%;
+    width: 120px;
+    background-color: transparent;
+    border: 0px;
+    color: #2f6993;
+}
+
+.filterRow{
+    margin-top:15px;
+}
+
+.filterBTN {
+    position: absolute;
+    bottom: 0;
+    margin-left:10px;
+}
+
+.newLink {
+    text-decoration-line: underline;
+    text-decoration-color: #2f6993;
+    color: #2f6993;
+    position:absolute;
+    bottom:0;
+    right:0;
+    margin-right:25px;
+}
+
+
+.wrapped-header {
+    text-align: center;
+    white-space: pre-wrap;
+}
+
+
+@media screen and (max-width: 999px) {
+    .webTable{display:none;}
+    .mobileTable{display:block;}
+    .filterBTN {
+        right: 0;
+        position: inherit;
+    }
+    .filterDiv{margin-bottom:-30px;}
+    .newLink{position:unset}
+}
+
+
+
+@media print {
+    table {
+        width: 100%;
+    }
+    body {
+        font-size: 12px;
+    }
+}
+

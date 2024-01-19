@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\main",
+    "\\main\\resources",
+    "\\main\\resources\\templates",
+    "\\main\\resources\\templates\\locations",
+    "\\main\\resources\\templates\\offender",
+    "\\main\\resources\\templates\\staff",
+    "\\main\\resources\\templates\\staff\\visitors",
+    "\\main\\resources\\templates\\visitor",
+    "\\main\\resources\\templates\\visits"
+  ],
+  "SelectedNode": "\\main\\resources\\templates\\visits\\print.html",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<!--
+created by: Jonathan Hays
+ -->
+<head th:replace="~{fragments :: head}">
+</head>
+
+<body>
+    <!-- Responsive navbar-->
+    <div>
+        <div class="sticky-top">
+            <div th:replace="~{fragments :: navBarStaff}"></div>
+        </div>
+    </div>
+    <!-- Page content-->
+    <section class="py-3 py-md-5 py-xl-8">
+        <div class="container">
+            <div class="row gy-4 align-items-center">
+                <div class="card col-12 col-md-6 col-xl-5 m-auto">
+                    <div class="border-0 rounded-4">
+                        <div class="card-body p-3 p-md-4 p-xl-5">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-4">
+                                        <h3>Create New Staff Member</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <form method="post" id="createStaff">
+
+
+                                <div class="row gy-3 overflow-hidden">
+                                    <div class="col-sm-12 col-lg-6 col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <input th:field="${registerFormDTO.firstName}" class="form-control" required>
+                                            <label for="firstName" class="form-label">First Name:</label>
+                                            <p class="error" th:errors="${registerFormDTO.firstName}"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-6 col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <input th:field="${registerFormDTO.lastName}" class="form-control" required>
+                                            <label for="lastName" class="form-label">Last Name:</label>
+                                            <p class="error" th:errors="${registerFormDTO.lastName}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row gy-3 overflow-hidden">
+                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <input th:field="${registerFormDTO.email}" class="form-control" required>
+                                            <label for="email" class="form-label">Email:</label>
+                                            <p class="error" th:errors="${registerFormDTO.email}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row gy-3 overflow-hidden">
+                                    <div class="col-sm-12 col-lg-6 col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <select th:field="${registerFormDTO.loginType}" class="form-control" required>
+                                                <option value=""></option>
+                                                <option value="admin">Admin</option>
+                                                <option value="staff">Staff</option>
+                                                <option value="visitingroom">Visiting Room</option>
+                                            </select>
+                                            <label for="loginType" class="form-label">Access Type:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-6 col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <select th:field="${registerFormDTO.location}" class="form-control" required>
+                                                    <option value=""></option>
+                                                    <option th:each="location : ${allLocations}" th:value="${location.id}"
+                                                            th:text="${location.name}"></option>
+
+                                            </select>
+                                            <label for="location" class="form-label">Location:</label>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row gy-3 overflow-hidden">
+                                        <div class="col-sm-12 col-lg-6 col-md-12">
+                                            <div class="form-floating mb-3">
+                                                <input th:field="${registerFormDTO.username}" class="form-control" required>
+                                                <label for="username" class="form-label">Username:</label>
+                                                <p class="error" th:errors="${registerFormDTO.username}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        
+                                        
+                                    <div class="row gy-3 overflow-hidden">
+                                        <div class="col-sm-12 col-lg-6 col-md-12">
+                                            <div class="form-floating mb-3">
+                                                <input th:field="${registerFormDTO.password}" class="form-control" type="password" required>
+                                                <label for="password" class="form-label">Password:</label>
+                                                <p class="error" th:errors="${registerFormDTO.password}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-lg-6 col-md-12">
+                                            <div class="form-floating mb-3">
+                                                <input th:field="${registerFormDTO.verifyPassword}" class="form-control" type="password" required>
+                                                <label for="verifyPassword" class="form-label">Verify Password:</label>
+                                                <p class="error" th:errors="${registerFormDTO.verifyPassword}"></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row gy-3 overflow-hidden">
+                                        <div class="col-12">
+                                            <div class="d-grid">
+                                                <button class="btn btn-primary btn-lg" type="submit">Create</button>
+                                            </div>
+                                        </div>
+                                    </div>
+</form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

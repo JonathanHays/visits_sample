@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--
+created by: Jonathan Hays
+ -->
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="~{fragments :: head}">
+</head>
+<body>
+
+    <div>
+        <div class="sticky-top">
+
+            <div th:replace="~{fragments :: navBarStaff}"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row filterRow">
+
+            <label>
+                Search Locations:
+            </label>
+
+        </div>
+        <div class="row justify-content-center ">
+            <div class="col-lg-6 col-sm-12 col-md-8">
+                <form th:action="@{/admin/locations/results}" method="post">
+
+                    <div style="display:flex;">
+                        <div class="col-sm-8 col-md-8 col-lg-8 filterDiv" style="margin-bottom:15px;">
+                            <input type="text" name="searchTerm" id="searchTerm" style="width:100%;" class="form-control" />
+                        </div>
+                        <div class="col-sm-4 col-md-2 col-lg-2" style="position: relative; margin-bottom: 15px;">
+                            <button class="btn btn-primary btn-md filterBTN" type="submit">Search</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6 col-sm-12 col-md-4" style="position:relative;">
+                <a th:href="@{/admin/locations/create}" class="newLink" style="margin-right:25px">Add new location</a>
+            </div>
+        </div>
+
+
+
+
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-0">
+
+                        <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; max-height: 500px;">
+                            <table class="table table-striped mb-0 webTable">
+                                <thead style="background-color: #2f6993;">
+                                    <tr>
+                                        <th scope="col">Location Name</th>
+                                        <th scope="col">Abbreviation</th>
+                                        <th scope="col">Status</th>
+                                        <th class="text-center" scope="col">Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="location : ${items.getResults()}">
+                                        <td th:text="${location.name}"></td>
+                                        <td th:text="${location.abbreviatedName}"></td>
+                                        <td th:text="${location.getIsActive()}"></td>
+
+                                        <td class="text-center">
+                                            <img class="tableIMG" th:src="@{/images/details.png}" th:onclick="|window.location.href='@{/admin/locations/edit/{id}(id=${location.id})}'|" title="Click to view details" />
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped mb-0 mobileTable">
+                                <tbody style="display:block;">
+                                    <tr th:each="location : ${items.getResults()}" style="display:grid;">
+                                        <td>
+
+                                            <div class="row justify-content-center">
+                                                <p style="font-weight: bold;">
+                                                    Location Name: <span style="font-weight: normal;"
+                                                                         th:text="${location.name}"></span>
+                                                </p>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p style="font-weight: bold;">
+                                                    Abbreviation: <span style="font-weight: normal;"
+                                                                        th:text="${location.abbreviatedName}"></span>
+                                                </p>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p style="font-weight: bold;">
+                                                    Stats: <span style="font-weight: normal;"
+                                                                 th:text="${location.getIsActive()}"></span>
+                                                </p>
+                                            </div>
+
+
+                                            <div class="row justify-content-center">
+                                                <p style="font-weight: bold;">
+                                                    Details: <span style="font-weight: normal;">
+                                                        <img class="tableIMG" th:src="@{/images/review-icon.png}" th:onclick="|window.location.href='@{/admin/locations/edit/{id}(id=${location.id})}'|" title="Click to view details" />
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:if="${searchTerm} == null">
+            <div class="row justify-content-center mt-2" th:if="${items.getTotalPages()} > 1">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" style="float:inline-end">
+                        <li th:class="${items.firstPageClass()}"><a class="page-link" th:href="@{/admin/locations?page=0}">First</a></li>
+                        <li th:if="${items.isFirstPage()} != true" class="page-item"><a class="page-link" th:href="@{/admin/locations?page={page}(page=${items.getPrevPage()})}" th:text="${items.getPrevPage() + 1}"></a></li>
+                        <li class="page-item active"><a class="page-link" th:href="@{/admin/locations?page={page}(page=${items.currentPage})}" th:text="${items.currentPage + 1}"></a></li>
+                        <li th:if="${items.isLastPage()} != true" class="page-item"><a class="page-link" th:href="@{/admin/locations?page={page}(page=${items.getNextPage()})}" th:text="${items.getNextPage() + 1}"></a></li>
+                        <li th:class="${items.lastPageClass()}"><a class="page-link" th:href="@{/admin/locations?page={page}(page=${items.getTotalPages() - 1})}">Last</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div th:if="${searchTerm} != null">
+            <div class="row justify-content-center mt-2" th:if="${items.getTotalPages()} > 1">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" style="float:inline-end">
+                        <li th:class="${items.firstPageClass()}"><a class="page-link" th:href="@{/admin/locations/results?page=0&searchTerm={term}(term=${searchTerm})}">First</a></li>
+                        <li th:if="${items.isFirstPage()} != true" class="page-item"><a class="page-link" th:href="@{/admin/locations/results?page={page}&searchTerm={term}(page=${items.getPrevPage()},term=${searchTerm})}" th:text="${items.getPrevPage() + 1}"></a></li>
+                        <li class="page-item active"><a class="page-link" th:href="@{/admin/locations/results?page={page}&searchTerm={term}(page=${items.currentPage},term=${searchTerm})}" th:text="${items.currentPage + 1}"></a></li>
+                        <li th:if="${items.isLastPage()} != true" class="page-item"><a class="page-link" th:href="@{/admin/locations/results?page={page}&searchTerm={term}(page=${items.getNextPage()},term=${searchTerm})}" th:text="${items.getNextPage() + 1}"></a></li>
+                        <li th:class="${items.lastPageClass()}"><a class="page-link" th:href="@{/admin/locations/results?page={page}&searchTerm={term}(page=${items.getTotalPages() - 1},term=${searchTerm})}">Last</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

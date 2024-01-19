@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--
+created by: Jonathan Hays
+ -->
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="~{fragments :: head}">
+</head>
+<body>
+
+    <div>
+        <div class="sticky-top">
+
+            <div th:replace="~{fragments :: navBarStaff}"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center filterRow">
+            <div class="col-lg-6 col-sm-12 col-md-8">
+                <form th:action="@{/pendingFilter}" method="post" th:if="${loginType}=='admin'">
+                    <div class="col-12">
+                        <label>
+                            Location:
+                        </label>
+                    </div>
+                    <div style="display:flex;">
+                        <div class="col-sm-8 col-md-8 col-lg-8 filterDiv">
+
+                            <select name="location" class="form-control">
+                                <option value="all">All Locations</option>
+                                <option th:each="location : ${allLocations}" th:value="${location.id}"
+                                        th:text="${location.name}"></option>
+                            </select>
+
+                        </div>
+                        <div class="col-sm-4 col-md-2 col-lg-2" style="position:relative;">
+                            <button class="btn btn-primary btn-md filterBTN" type="submit">Submit</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6 col-sm-12 col-md-4">
+                <form th:action="@{/staff/visits/results}" method="post" id="searchDateForm">
+
+                    <div>
+                        <div style="width:45%;display: none;">
+                            <label for="searchDate" id="searchDateLabel" class="formTitle"
+                                   style="min-width: 40%;">
+                                Search
+                                Visits:
+                            </label>
+                            <input type="text" name="searchDate" id="searchDate" th:value="${today}" class="form-control" />
+                        </div>
+                        <div style="width:45%;float:right;">
+                            <input type="submit" value="View Today's Visits List" class="todayLink"
+                                   style="width: 200px;margin-top:40px;" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-0">
+
+                        <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; max-height: 500px;">
+                            <table class="table table-striped mb-0 webTable">
+                                <thead style="background-color: #2f6993;">
+                                    <tr>
+                                        <th scope="col">Location</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Time Slot</th>
+                                        <th scope="col">DOC #</th>
+                                        <th scope="col">Offender</th>
+                                        <th scope="col">Visitor</th>
+                                        <th class="text-center" scope="col">Food Visit</th>
+                                        <th class="text-center" scope="col">Review</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
